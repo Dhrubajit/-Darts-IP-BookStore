@@ -1,0 +1,5 @@
+# BookStore/
+.settings/*
+.classpath
+.project
+/target/*
