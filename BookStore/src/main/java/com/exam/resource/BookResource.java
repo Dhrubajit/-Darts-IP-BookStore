@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
+import com.exam.entity.BookEntity;
 import com.exam.model.Book;
 import com.exam.model.Input;
 import com.exam.repository.BookRepository;
@@ -47,8 +48,7 @@ public class BookResource extends BaseResource {
 		return response;
 	}
 	
-	
-	
+		
 	@PUT
 	@Path("/saveAll")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -57,7 +57,8 @@ public class BookResource extends BaseResource {
 		Response response;
 		try {
 			List<Book> books = bookService.readJson();
-			bookRepo.saveAll(books);
+			List<BookEntity> bookEntities = bookService.populateEntity(books);
+			bookRepo.saveAll(bookEntities);
 			response = Response.status(Status.OK).entity(books).build();
 		}
 		catch (Exception ex) {
@@ -79,15 +80,15 @@ public class BookResource extends BaseResource {
 				response = Response.status(Status.BAD_REQUEST).entity(this.getResponseFromError(new Exception("title cannot be blank"), Status.BAD_REQUEST)).build();
 				return response;
 			}
-			List<Book> books = bookRepo.findByTitle(input.getTitle());
-			response = Response.status(Status.CREATED).entity(books).build();
+			BookEntity bookEntity = bookRepo.findByTitle(input.getTitle());
+			response = Response.status(Status.CREATED).entity(bookService.populateModel(bookEntity)).build();
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
 			response = Response.status(Status.INTERNAL_SERVER_ERROR).entity(this.getResponseFromError(ex, Status.INTERNAL_SERVER_ERROR)).build();
 		}
 		return response;
-	}
+	} 
 	
 }
 

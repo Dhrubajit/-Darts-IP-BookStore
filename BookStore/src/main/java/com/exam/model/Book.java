@@ -4,56 +4,30 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "title", "author", "publishedDate", "isbn", "reviews" })
-@Entity
-@Table(name = "Book")
 public class Book {
-	
-	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="bookId")
-	private Integer bookId;
-	
+
 	@JsonProperty("title")
-	@Column(name="title")
 	private String title;
-	
+
 	@JsonProperty("author")
-	@Column(name="author")
 	private String author;
-	
+
 	@JsonProperty("publishedDate")
-	@Temporal(value=TemporalType.DATE)
-	@Column(name="publishedDate")
 	private Date publishedDate;
-	
+
 	@JsonProperty("isbn")
-	@Column(name="isbn")
 	private String isbn;
-	
+
 	@JsonProperty("reviews")
-	@OneToMany(cascade={CascadeType.ALL},mappedBy = "book")
-	@OrderBy("reviewId")
-	private List<Review> reviews;
-	
-	
+	private List<Review> reviews = new ArrayList<>();
+
 
 	@JsonProperty("title")
 	public String getTitle() {
