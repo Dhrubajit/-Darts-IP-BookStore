@@ -1,0 +1,12 @@
+com\exam\MainApplication.class
+com\exam\config\JerseyResourceConfig.class
+com\exam\util\ErrorBody.class
+com\exam\model\Review.class
+com\exam\repository\BookRepository.class
+com\exam\model\Input.class
+com\exam\service\BookServiceImpl$1.class
+com\exam\resource\BookResource.class
+com\exam\model\Book.class
+com\exam\resource\BaseResource.class
+com\exam\service\BookServiceImpl.class
+com\exam\service\BookService.class
