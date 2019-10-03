@@ -13,9 +13,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 public class BookServiceImpl implements BookService {
+	private String fileName = "test.json";
+	
 	public List<Book> readJson() throws IOException {
 		ObjectMapper objectMapper = new ObjectMapper();
-        List<Book> books = objectMapper.readValue(new File("test.json"), new TypeReference<List<Book>>() {});
+        List<Book> books = objectMapper.readValue(new File(fileName), new TypeReference<List<Book>>() {});
         return books;
 	}
 }
