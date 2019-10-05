@@ -1,0 +1,5 @@
+
+API end points with details
+localhost:PORT/bookStore/viewAll (Reading JSON file test.json and showing all books with reviews)
+localhost:PORT/bookStore/saveAll  (Reading JSON file test.json and save in MySQL DataBase)
+localhost:PORT/bookStore/getByTitle (get data by book title)
